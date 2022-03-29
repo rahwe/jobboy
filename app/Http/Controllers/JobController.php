@@ -6,6 +6,7 @@ use App\Models\Job;
 use App\Models\JobCategory;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
+use Illuminate\Support\Facades\Auth;
 
 class JobController extends Controller
 {
@@ -47,9 +48,12 @@ class JobController extends Controller
 
         
         Job::insert([
+
+            'user_id' => Auth::user()->id,
             'category_id' => $request->category_id,
             'name' => $request->name,
             'description' => $request->description,
+
         ]);
         
         return back()->with('success',"The job was created.");
