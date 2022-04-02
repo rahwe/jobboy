@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
-use App\Http\Controllers\JobCategoryController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 
+use App\Http\Controllers\FrontController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,12 +17,13 @@ use App\Http\Controllers\JobCategoryController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\FrontController@index');
+Route::get('/job_detail/{job}', 'App\Http\Controllers\FrontController@show');
+
 
 Route::resource('jobs', JobController::class);
-Route::resource('categories', JobCategoryController::class);
+Route::resource('categories', CategoryController::class);
+Route::get('/employer_list', 'App\Http\Controllers\UserController@index');
 
 Auth::routes();
 

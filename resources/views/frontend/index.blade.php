@@ -1,29 +1,11 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Jobboy')
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">{{ __('My Profile') }}</div>
-
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12 d-flex justify-content-left">
-                            <a href="/jobs/create" class="btn btn-primary btn-sm float-right ">
-                                <i class="fa-solid fa-circle-plus"></i>
-                                Create Job
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="profile">
-                                <h2>{{ auth()->user()->name }}</h2>
-                                <p>{{ auth()->user()->about ?? '' }}</p>
-                                </div>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-12 pt-3">
                             <ul class="list-group">

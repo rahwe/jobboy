@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Job;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        
+        $jobs = Job::select()
+        ->where('user_id', auth()->id())
+        ->orderBy('updated_at', 'DESC')
+        ->get();
+        return view('home',[
+            'jobs' => $jobs,
+            'message_success' => Session::get('message_success')
+        ]);
     }
 }

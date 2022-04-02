@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
-use App\Models\JobCategory;
+use App\Models\Category;
 use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
 use Illuminate\Support\Facades\Auth;
@@ -28,8 +28,12 @@ class JobController extends Controller
      */
     public function create()
     {
-        $categories = JobCategory::orderBy('id', 'DESC')->get();
-        return view('jobs.create', compact('categories'));
+        $categories = Category::orderBy('id', 'DESC')->get();
+
+        if($categories->isEmpty()){
+            return back()->with('warning',"You must create category first.");
+        }
+        return view('jobs.create')->with('categories', $categories);
     }
 
     /**

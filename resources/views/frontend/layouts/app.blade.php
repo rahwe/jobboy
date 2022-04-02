@@ -33,8 +33,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                            
-                          
+                        <li class="nav-item">
+                            <a class="nav-link {{ Request::is('home') ? ' active' : '' }}" aria-current="page" href="/home">Home</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link {{ Request::is('jobs') ? ' active' : '' }}" href="/jobs">Jobs</a>
+                          </li>
                           <li class="nav-item">
                             <a class="nav-link" href="#">Resource</a>
                           </li>
@@ -48,24 +52,6 @@
                           <li class="nav-item">
                             <a class="nav-link" href="#">About Us</a>
                           </li>
-
-                          @if (Auth::user() AND Auth::user()->isAdmin())
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('categories*') ? ' active' : '' }}" href="/categories">Category</a>
-                            </li>
-
-                            <li class="nav-item">
-                            <a class="nav-link {{ Request::is('jobs*') ? ' active' : '' }}" aria-current="page" href="/jobs">Jobs</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('employer_list') ? ' active' : '' }}" aria-current="page" href="/employer_list">Employers</a>
-                            </li>
-                          @endif
-
-
-                        
-                          
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -90,10 +76,6 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('home') }}">
-                                        {{ __('Profile') }}
-                                    </a>
-
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -146,12 +128,8 @@
             @endif
                 
             </div>
-            
-
 
             @yield('content')
-
-            
         </main>
     </div>
 </body>

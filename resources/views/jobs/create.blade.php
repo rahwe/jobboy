@@ -21,7 +21,7 @@
                                     <select class="form-control" name="category_id">
                                         <option selected="" disabled="">Choose category</option>
                                         @foreach ($categories as $category )
-                                            <option value="{{ $category->id }}">{{ $category->cat_name }}</option>
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <small class="form-text text-danger">{!! $errors->first('category_id')!!}</small>
