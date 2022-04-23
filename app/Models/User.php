@@ -55,6 +55,10 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
+    public function isEmployer() {
+        return $this->role === 'employer';
+    }
+
 
 
     

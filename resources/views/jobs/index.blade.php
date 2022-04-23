@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'All jobs')
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -22,15 +22,28 @@
                                 <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
                                       <div class="fw-bold">
-                                          <a href="" class="job-title">{{ $job->name }}</a>
+                                          <div class="job-title">{{ $job->name }}</div>
                                       </div>
-                                      <a href="" class="company-name">Company Name</a>
-                                      <p>Full Time | Phnom Penh <span style="color: red;">Negotiable</span></p>
+                                      <div class="company-name">{{ $job->user->name }}</div>
+                                      <p>{{ $job->shift->name }} | {{ $job->location->name }} <span style="color: red;">{{ $job->salary->name }}</span></p>
                                      
                                     </div>
                                     <div class="salary">
                                         Mar-24-2022
-                                        <div class="btn btn-outline-info ml-3">Apply Now</div>
+                                        <a href="/change_status/{{ $job->id }}" class="btn {{ $job->status==='active' ? 'btn-outline-success' : 'btn-outline-danger' }} btn-sm ml-3">
+                                            {{ $job->status }}
+                                        </a>
+                                        <a href="/jobs/{{ $job->id }}/edit" class="btn btn-outline-warning btn-sm mx-1">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </a>
+                        
+                                        @can('delete', $job)
+                                            <form class="float-right" style="display: inline" action="/jobs/{{ $job->id }}" method="post">
+                                                @csrf
+                                                @method("DELETE")
+                                                <button class="btn btn-sm btn-outline-danger" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                                            </form>
+                                        @endcan
                                     </div>
                                   </li>
                                 @endforeach
@@ -38,9 +51,6 @@
                               </ul>
                         </div>
                     </div>
-                    
-
-                    
                 </div>
             </div>
         </div>

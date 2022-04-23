@@ -15,11 +15,21 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('status')->default('active');
+            $table->text('description');
+            $table->text('requirement');
+
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('category_id');
-            $table->string('name');
-            $table->text('description');
+            $table->unsignedBigInteger('education_id');
+            $table->unsignedBigInteger('shift_id');
+            $table->unsignedBigInteger('salary_id');
+            $table->unsignedBigInteger('location_id');
+
             $table->timestamps();
+
+           
         });
     }
 

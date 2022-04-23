@@ -10,6 +10,13 @@ class JobPolicy
 {
     use HandlesAuthorization;
 
+
+    public function before($user, $ability){
+        if($user->role === 'admin'){
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -53,7 +60,7 @@ class JobPolicy
      */
     public function update(User $user, Job $job)
     {
-        //
+        return $user->id === $job->user_id;
     }
 
     /**
@@ -65,7 +72,7 @@ class JobPolicy
      */
     public function delete(User $user, Job $job)
     {
-        //
+        return $user->id === $job->user_id;
     }
 
     /**
@@ -77,7 +84,7 @@ class JobPolicy
      */
     public function restore(User $user, Job $job)
     {
-        //
+        return $user->id === $job->user_id;
     }
 
     /**
@@ -89,6 +96,6 @@ class JobPolicy
      */
     public function forceDelete(User $user, Job $job)
     {
-        //
+        return $user->id === $job->user_id;
     }
 }
